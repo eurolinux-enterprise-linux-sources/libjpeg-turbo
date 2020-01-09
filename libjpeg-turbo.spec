@@ -1,6 +1,6 @@
 Name:		libjpeg-turbo
 Version:	1.2.1
-Release:	1%{?dist}
+Release:	3%{?dist}
 Summary:	A MMX/SSE2 accelerated library for manipulating JPEG image files
 
 Group:		System Environment/Libraries
@@ -23,6 +23,8 @@ Provides:	libjpeg%{_isa} = 6b-47%{?dist}
 %endif
 
 Patch0:		libjpeg-turbo12-noinst.patch
+Patch1:		libjpeg-turbo12-CVE-2013-6629.patch
+Patch2:		libjpeg-turbo12-CVE-2013-6630.patch
 
 %description
 The libjpeg-turbo package contains a library of functions for manipulating
@@ -66,6 +68,8 @@ JPEG images.
 %setup -q
 
 %patch0 -p1 -b .noinst
+%patch1 -p1 -b .CVE-2013-6629
+%patch2 -p1 -b .CVE-2013-6630
 
 %build
 autoreconf -fiv
@@ -125,6 +129,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libjpeg.a
 
 %changelog
+* Wed Nov 27 2013 Petr Hracek <phracek@redhat.com> - 1.2.1-3
+- Resolves: #1031955 apply patch for CVE-2013-6630
+
+* Tue Nov 26 2013 Petr Hracek <phracek@redhat.com> - 1.2.1-2
+- Resolves: #1031955 libjpeg-turbo: various flaws (CVE-2013-6629)
+
 * Mon Oct  1 2012 Tom Lane <tgl@redhat.com> 1.2.1-1
 - Imported into RHEL-6 from Fedora 18
 - Dropped separate utils subpackage, because existing packages might expect
