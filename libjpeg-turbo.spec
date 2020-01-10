@@ -1,6 +1,6 @@
 Name:		libjpeg-turbo
 Version:	1.2.90
-Release:	6%{?dist}
+Release:	8%{?dist}
 Summary:	A MMX/SSE2 accelerated library for manipulating JPEG image files
 
 Group:		System Environment/Libraries
@@ -28,6 +28,10 @@ Patch0:		libjpeg-turbo12-noinst.patch
 Patch1:		libjpeg-turbo12-CVE-2013-6630.patch
 Patch2:		libjpeg-turbo12-CVE-2013-6629.patch
 Patch3:		libjpeg-turbo12-pkgconfig.patch
+Patch4:		libjpeg-turbo12-CVE-2018-11212.patch
+Patch5:		libjpeg-turbo12-CVE-2016-3616_CVE-2018-11213_CVE-2018-11214.patch
+Patch6:		libjpeg-turbo12-CVE-2018-11813.patch
+Patch7:		libjpeg-turbo12-CVE-2018-14498.patch
 
 %description
 The libjpeg-turbo package contains a library of functions for manipulating
@@ -98,6 +102,10 @@ will manipulate JPEG files using the TurboJPEG library.
 %patch1 -p1 -b .CVE-2013-6630
 %patch2 -p1 -b .CVE-2013-6629
 %patch3 -p1 -b .pkgconfig
+%patch4 -p1 -b .CVE-2018-11212
+%patch5 -p1 -b .CVE-2016-3616_CVE-2018-11213_CVE-2018-11214
+%patch6 -p1 -b .CVE-2018-11813
+%patch7 -p1 -b .CVE-2018-14498
 
 %build
 autoreconf -fiv
@@ -173,6 +181,15 @@ make test
 %{_libdir}/pkgconfig/libturbojpeg.pc
 
 %changelog
+* Wed Mar 20 2019 Nikola Forró <nforro@redhat.com> - 1.2.90-8
+- Fix CVE-2018-14498 (#1687475)
+
+* Thu Dec 06 2018 Nikola Forró <nforro@redhat.com> - 1.2.90-7
+- Fix CVE-2018-11212 (#1586062)
+- Fix CVE-2016-3616 (#1318509), CVE-2018-11213 (#1589091)
+  and CVE-2018-11214 (#1589110)
+- Fix CVE-2018-11813 (#1591203)
+
 * Thu May 24 2018 Nikola Forró <nforro@redhat.com> - 1.2.90-6
 - Add pkgconfig scripts (#1581687)
 
