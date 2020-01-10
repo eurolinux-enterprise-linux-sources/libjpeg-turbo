@@ -1,6 +1,6 @@
 Name:		libjpeg-turbo
 Version:	1.2.90
-Release:	5%{?dist}
+Release:	6%{?dist}
 Summary:	A MMX/SSE2 accelerated library for manipulating JPEG image files
 
 Group:		System Environment/Libraries
@@ -27,6 +27,7 @@ Provides:	libjpeg%{_isa} = 6b-47%{?dist}
 Patch0:		libjpeg-turbo12-noinst.patch
 Patch1:		libjpeg-turbo12-CVE-2013-6630.patch
 Patch2:		libjpeg-turbo12-CVE-2013-6629.patch
+Patch3:		libjpeg-turbo12-pkgconfig.patch
 
 %description
 The libjpeg-turbo package contains a library of functions for manipulating
@@ -96,6 +97,7 @@ will manipulate JPEG files using the TurboJPEG library.
 %patch0 -p1 -b .noinst
 %patch1 -p1 -b .CVE-2013-6630
 %patch2 -p1 -b .CVE-2013-6629
+%patch3 -p1 -b .pkgconfig
 
 %build
 autoreconf -fiv
@@ -142,6 +144,7 @@ make test
 %{_includedir}/jmorecfg.h
 %{_includedir}/jpeglib.h
 %{_libdir}/libjpeg.so
+%{_libdir}/pkgconfig/libjpeg.pc
 
 %files utils
 %defattr(-,root,root,-)
@@ -167,8 +170,12 @@ make test
 %files -n turbojpeg-devel
 %{_includedir}/turbojpeg.h
 %{_libdir}/libturbojpeg.so
+%{_libdir}/pkgconfig/libturbojpeg.pc
 
 %changelog
+* Thu May 24 2018 Nikola Forró <nforro@redhat.com> - 1.2.90-6
+- Add pkgconfig scripts (#1581687)
+
 * Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.2.90-5
 - Mass rebuild 2014-01-24
 
